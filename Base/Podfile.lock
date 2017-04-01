@@ -1,0 +1,48 @@
+PODS:
+  - Alamofire (4.4.0)
+  - Crashlytics (3.8.4):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.11)
+  - IQKeyboardManagerSwift (4.0.8)
+  - JSQWebViewController (5.0.0)
+  - ObjectMapper (2.2.5)
+  - PKHUD (4.2.0)
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
+  - SwiftColor (0.4.0)
+  - SwiftMessages (3.3.2)
+  - SwiftyJSON (3.1.4)
+  - VTAcknowledgementsViewController (1.2.1)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.0)
+  - Crashlytics
+  - Fabric
+  - IQKeyboardManagerSwift
+  - JSQWebViewController
+  - ObjectMapper (~> 2.2)
+  - PKHUD (~> 4.0)
+  - SDWebImage (~> 3.8)
+  - SwiftColor
+  - SwiftMessages
+  - SwiftyJSON
+  - VTAcknowledgementsViewController
+
+SPEC CHECKSUMS:
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
+  IQKeyboardManagerSwift: c04bc9f68473823f825eb44d958fce98d921bead
+  JSQWebViewController: 0461aa42612b221571556df61d9c09f080cb2eef
+  ObjectMapper: fb30f71e08470d1e5a20b199fafe1246281db898
+  PKHUD: 48af884cf00c2213b0313b739d914e6cab1c0f5e
+  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  SwiftColor: c240d8cb2e1a29d731ae8deca8739eac6b9c56bd
+  SwiftMessages: 278ef49901fae934241d73b2a781edb1bf7bea5c
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  VTAcknowledgementsViewController: e1de80f2c0ce31cc7e1c6f1c8aaeec2770371f09
+
+PODFILE CHECKSUM: 48b9def6f53c8ca0e0e27dd7524a927119483807
+
+COCOAPODS: 1.1.1
