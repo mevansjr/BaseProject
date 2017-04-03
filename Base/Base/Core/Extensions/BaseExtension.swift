@@ -95,8 +95,8 @@ extension String {
         var headers = [String: String]()
         headers["Platform"] = "ios"
         headers["Content-Type"] = "application/json"
-        headers["client-id"] = Global.API_CLIENT_ID
-        headers["client-secret"] = Global.API_CLIENT_SECRET
+        headers["client-id"] = SecureStrings.shared.ApiClientId
+        headers["client-secret"] = SecureStrings.shared.ApiClientSecret
         headers["AppVersion"] = String().appVersion()
         return headers
     }

@@ -25,6 +25,7 @@ import IQKeyboardManagerSwift
     var pushRegisterInProcess = false
     var hostConnected = true
     var internetConnected = true
+    var permissionsHasShown = false
 
     // MARK: Application Delegate Methods
 

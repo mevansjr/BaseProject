@@ -16,23 +16,13 @@ import ObjectMapper
 import SwiftMessages
 import Fabric
 import Crashlytics
+import Sparrow
 
 enum Constants {
-    static let imagePlaceholder = "image-placeholder"
-}
-
-struct Global {
-    static let API_BASE_DOMAIN = "http://www.google.com"
-    static let API_VERSION = "v1"
-    static let API_CLIENT_ID = "client-id"
-    static let API_CLIENT_SECRET = "client-secret"
-    static let API_ACCESS_TOKEN = "AccessToken"
-    static let APP_FIRST_LOAD = "AppFirstLoad"
-    static let LOGIN_EMAIL_KEY = "Email"
-    static let LOGIN_PASSWORD_KEY = "LoginPassword"
-    static let PLAYPUSHER_CLIENT_ID = ""
-    static let PLAYPUSHER_CLIENT_SECRET = ""
-    static var APP_REALM_VERSION: Int = 1
+    static let loginEmailKey = "Email"
+    static let loginPasswordKey = "LoginPassword"
+    static let appFirstLoad = "AppFirstLoad"
+    static let apiAccessToken = "AccessToken"
 }
 
 struct UI {
@@ -64,6 +54,7 @@ func uniq<S: Sequence, E: Hashable>(source: S) -> [E] where E==S.Iterator.Elemen
 }
 
 let app = UIApplication.shared.delegate as! AppDelegate
+var permissionAssistant = SPRequestPermissionAssistant.modules.dialog.interactive.create(with: [.Location, .Notification])
 
 func forcePortrait() {
     UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
@@ -178,7 +169,7 @@ func showOutController() {
 
 func setupReachability() {
     NotificationCenter.default.addObserver(app.self, selector: #selector(app.reachabilityChanged(note:)), name: NSNotification.Name(rawValue: "kNetworkReachabilityChangedNotification"), object: nil)
-    app.hostReachability = Reachability(hostName: Global.API_BASE_DOMAIN)
+    app.hostReachability = Reachability(hostName: SecureStrings.shared.ApiHost)
     app.hostReachability.startNotifier()
     updateInterfaceWithReachability(reachability: app.hostReachability)
     app.internetReachability = Reachability.forInternetConnection()
@@ -189,6 +180,12 @@ func setupReachability() {
     }
     else {
         showNoConnectionUX(message: nil)
+    }
+}
+
+func permissionsCheck(vc: UIViewController) {
+    if !permissionAssistant.isAllowPermission(.Location) || !permissionAssistant.isAllowPermission(.Notification) {
+        permissionAssistant.present(on: vc)
     }
 }
 

@@ -33,7 +33,8 @@ import SDWebImage
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = String().getHeaders()
         self.manager = Alamofire.SessionManager(configuration: configuration)
-        self.manager.adapter = ClientAccessTokenAdapter(accessToken: "")
+        // self.manager.adapter = ClientAccessTokenAdapter(accessToken: "") // Non-OAuth Token Adapter
+        self.manager.adapter = ClientOAuthHandler(clientID: SecureStrings.shared.ApiClientId, baseURLString: SecureStrings.shared.ApiHost, accessToken: "", refreshToken: "") // OAuth2 Adapter
     }
 
     // MARK: OAuth Methods

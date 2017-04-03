@@ -21,7 +21,7 @@ class RootInteractor: RootUseCase {
                     showInController()
                 }
                 else {
-                    showOutController()
+                    showInController() // CHANGE
                 }
             }
         }
@@ -36,13 +36,13 @@ class RootInteractor: RootUseCase {
                     let uuid = UIDevice.current.identifierForVendor!.uuidString
                     print("uuid: \(uuid)")
                     guard let userId = success?.UserId else {
-                        PlayPusher.sharedInstance().initPlayPusher(uuid, withClientId: Global.PLAYPUSHER_CLIENT_ID, withClientSecret: Global.PLAYPUSHER_CLIENT_SECRET)
+                        PlayPusher.sharedInstance().initPlayPusher(uuid, withClientId: SecureStrings.shared.PlayPusherClientId, withClientSecret: SecureStrings.shared.PlayPusherClientSecret)
                         if (options != nil) {
                             PlayPusher.sharedInstance().handleNotification(launchOptions)
                         }
                         return
                     }
-                    PlayPusher.sharedInstance().initPlayPusher(uuid, withClientId: Global.PLAYPUSHER_CLIENT_ID, withClientSecret: Global.PLAYPUSHER_CLIENT_SECRET, withUserId: "\(userId)")
+                    PlayPusher.sharedInstance().initPlayPusher(uuid, withClientId: SecureStrings.shared.PlayPusherClientId, withClientSecret: SecureStrings.shared.PlayPusherClientSecret, withUserId: "\(userId)")
                     if (options != nil) {
                         PlayPusher.sharedInstance().handleNotification(launchOptions)
                     }

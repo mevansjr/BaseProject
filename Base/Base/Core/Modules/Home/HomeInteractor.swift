@@ -8,14 +8,7 @@
 
 import Foundation
 
-class HomeInteractor {
-
-    // MARK: Properties
+class HomeInteractor: HomeUseCase  {
 
     weak var output: HomeInteractorOutput!
-}
-
-
-extension HomeInteractor: HomeUseCase {
-    
 }

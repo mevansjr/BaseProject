@@ -3,6 +3,9 @@
 # Uncomment this line if you're using Swift
 use_frameworks!
 
+# ignore all warnings from all pods
+inhibit_all_warnings!
+
 target ‘Base’ do
 
 pod 'Fabric'
@@ -19,5 +22,6 @@ pod 'Crashlytics'
 pod 'SwiftyJSON'
 pod 'Alamofire', '~> 4.0'
 pod 'ObjectMapper', '~> 2.2'
+pod 'Sparrow/Modules/RequestPermission', :git => 'https://github.com/IvanVorobei/Sparrow.git’
 
 end

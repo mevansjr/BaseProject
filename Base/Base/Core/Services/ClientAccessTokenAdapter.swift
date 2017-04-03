@@ -18,7 +18,7 @@ class ClientAccessTokenAdapter: RequestAdapter {
     
     func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
         var urlRequest = urlRequest
-        if urlRequest.url != nil && urlRequest.url!.absoluteString.hasPrefix(Global.API_BASE_DOMAIN) {
+        if urlRequest.url != nil && urlRequest.url!.absoluteString.hasPrefix(SecureStrings.shared.ApiHost) {
             urlRequest.setValue(accessToken, forHTTPHeaderField: "token")
         }
         return urlRequest

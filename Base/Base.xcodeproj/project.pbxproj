@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		013506D21E9289C0005A9F22 /* UAObfuscatedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013506D11E9289C0005A9F22 /* UAObfuscatedString.swift */; };
+		013506D41E9289DB005A9F22 /* SecureStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013506D31E9289DB005A9F22 /* SecureStrings.swift */; };
 		013757081E8EC69400B17404 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 013757071E8EC69400B17404 /* UIKit.framework */; };
 		0137570A1E8EC69400B17404 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 013757091E8EC69400B17404 /* Foundation.framework */; };
 		0137570C1E8EC69400B17404 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0137570B1E8EC69400B17404 /* CoreGraphics.framework */; };
@@ -54,6 +56,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		013506D11E9289C0005A9F22 /* UAObfuscatedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UAObfuscatedString.swift; sourceTree = "<group>"; };
+		013506D31E9289DB005A9F22 /* SecureStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureStrings.swift; sourceTree = "<group>"; };
 		013757041E8EC69400B17404 /* Base.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Base.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		013757071E8EC69400B17404 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		013757091E8EC69400B17404 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -135,6 +139,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		013506D01E9289C0005A9F22 /* UAObfuscatedString */ = {
+			isa = PBXGroup;
+			children = (
+				013506D11E9289C0005A9F22 /* UAObfuscatedString.swift */,
+			);
+			path = UAObfuscatedString;
+			sourceTree = "<group>";
+		};
 		013756F81E8EC69400B17404 = {
 			isa = PBXGroup;
 			children = (
@@ -232,11 +244,12 @@
 		013757211E8EC69400B17404 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				0137574D1E8EC92100B17404 /* MBEPickerController */,
-				013757491E8EC91300B17404 /* StackView */,
-				013757421E8EC90100B17404 /* PlayPusher */,
 				01B091251E8ECA7600735F4B /* JSImagePickerViewController */,
+				0137574D1E8EC92100B17404 /* MBEPickerController */,
+				013757421E8EC90100B17404 /* PlayPusher */,
+				013757491E8EC91300B17404 /* StackView */,
 				01B091261E8ECA7E00735F4B /* Reachability */,
+				013506D01E9289C0005A9F22 /* UAObfuscatedString */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -328,6 +341,7 @@
 			isa = PBXGroup;
 			children = (
 				01B0913E1E8ECC6400735F4B /* Constants.swift */,
+				013506D31E9289DB005A9F22 /* SecureStrings.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -427,7 +441,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "3Advance, LLC";
 				TargetAttributes = {
 					013757031E8EC69400B17404 = {
@@ -540,6 +554,7 @@
 				013757191E8EC69400B17404 /* ClientOAuthHandler.swift in Sources */,
 				01B0914C1E8ED1C500735F4B /* RootRouter.swift in Sources */,
 				01B0915A1E8ED2C900735F4B /* LoginInteractor.swift in Sources */,
+				013506D41E9289DB005A9F22 /* SecureStrings.swift in Sources */,
 				01B091311E8ECB9800735F4B /* ReusableViewExtension.swift in Sources */,
 				0137571D1E8EC69400B17404 /* ClientService.swift in Sources */,
 				01B091471E8ECFC300735F4B /* ViewProtocols.swift in Sources */,
@@ -561,6 +576,7 @@
 				01B091321E8ECB9800735F4B /* IndicatableViewExtension.swift in Sources */,
 				01B091721E8EEA2C00735F4B /* HomeViewController.swift in Sources */,
 				013757201E8EC69400B17404 /* User.swift in Sources */,
+				013506D21E9289C0005A9F22 /* UAObfuscatedString.swift in Sources */,
 				01B0915E1E8ED2C900735F4B /* LoginViewController.swift in Sources */,
 				01B0914B1E8ED1C500735F4B /* RootContract.swift in Sources */,
 			);

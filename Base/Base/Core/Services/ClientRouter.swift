@@ -12,7 +12,7 @@ enum ClientRouter: URLRequestConvertible {
     case loginUser(email: String, password: String)
     case getUser()
     
-    static let baseURLString = Global.API_BASE_DOMAIN
+    static let baseURLString = SecureStrings.shared.ApiHost
     
     var method: HTTPMethod {
         switch self {
@@ -43,8 +43,8 @@ enum ClientRouter: URLRequestConvertible {
         switch self {
         case .loginUser(let email, let password):
             let parameters = ["email": email, "password": password]
-            UserDefaults.standard.set(email, forKey: Global.LOGIN_EMAIL_KEY)
-            UserDefaults.standard.set(password, forKey: Global.LOGIN_PASSWORD_KEY)
+            UserDefaults.standard.set(email, forKey: Constants.loginEmailKey)
+            UserDefaults.standard.set(password, forKey: Constants.loginPasswordKey)
             UserDefaults.standard.synchronize()
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
         case .getUser:

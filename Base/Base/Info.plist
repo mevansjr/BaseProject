@@ -18,11 +18,31 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>abe123</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera Usage Text.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Location Text.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photo Library Text.</string>
 	<key>UIAppFonts</key>
 	<array/>
 	<key>UILaunchStoryboardName</key>
@@ -37,19 +57,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-    <key>Fabric</key>
-    <dict>
-        <key>APIKey</key>
-        <string>43336ce109856e3cf4452829a8e6b6783886fefb</string>
-        <key>Kits</key>
-        <array>
-            <dict>
-                <key>KitInfo</key>
-                <dict/>
-                <key>KitName</key>
-                <string>Crashlytics</string>
-            </dict>
-        </array>
-    </dict>
 </dict>
 </plist>
