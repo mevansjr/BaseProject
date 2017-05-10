@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'AEB2BC910C23731A5A114DD2BB47A01A'
+               BlueprintIdentifier = 'EF5ED08362FA658F4AB0FA24'
                BlueprintName = 'VTAcknowledgementsViewController'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'VTAcknowledgementsViewController.framework'>

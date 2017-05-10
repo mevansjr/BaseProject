@@ -7,11 +7,21 @@
 		<key>Base.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>21</integer>
+		</dict>
+		<key>BaseTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>22</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>010A9C221EC3457F00C3CBCC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>013757031E8EC69400B17404</key>
 		<dict>
 			<key>primary</key>

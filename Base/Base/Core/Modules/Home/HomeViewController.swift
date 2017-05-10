@@ -14,6 +14,7 @@ class HomeViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        presenter.viewDidAppear(animated)
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(3)) {
             permissionsCheck(vc: self)
         }

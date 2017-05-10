@@ -11,4 +11,8 @@ import Foundation
 class HomeInteractor: HomeUseCase  {
 
     weak var output: HomeInteractorOutput!
+
+    func getUser() {
+        print("GET USER")
+    }
 }

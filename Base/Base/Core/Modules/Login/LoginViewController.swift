@@ -21,6 +21,10 @@ class LoginViewController: UIViewController {
     fileprivate func setupView() {
         navigationItem.title = "Login"
     }
+
+    @IBAction func loginAction() {
+        presenter.didClickLogin()
+    }
 }
 
 extension LoginViewController: LoginView {

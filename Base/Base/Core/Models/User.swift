@@ -9,21 +9,18 @@ import Foundation
 import ObjectMapper
 
 
-class User : NSObject, Mappable{
+class User : NSObject, Mappable {
 
 	var UserId : Int?
 
-
-	class func newInstance(_ map: Map) -> Mappable?{
+	class func newInstance(_ map: Map) -> Mappable? {
 		return User()
 	}
 	required init?(map: Map){}
 	override init(){}
 
-	func mapping(map: Map)
-	{
+	func mapping(map: Map) {
 		UserId <- map["UserId"]
-		
 	}
 
 }

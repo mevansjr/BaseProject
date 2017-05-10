@@ -84,28 +84,30 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Alamofire-iOS8.0/Alamofire.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Fakery-iOS8.0/Fakery.framework"
   install_framework "$BUILT_PRODUCTS_DIR/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JSQWebViewController/JSQWebViewController.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/ObjectMapper/ObjectMapper.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/ObjectMapper-iOS8.0/ObjectMapper.framework"
   install_framework "$BUILT_PRODUCTS_DIR/PKHUD/PKHUD.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SDWebImage/SDWebImage.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Sparrow/Sparrow.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftColor/SwiftColor.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftMessages/SwiftMessages.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON/SwiftyJSON.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON-iOS8.0/SwiftyJSON.framework"
   install_framework "$BUILT_PRODUCTS_DIR/VTAcknowledgementsViewController/VTAcknowledgementsViewController.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Alamofire-iOS8.0/Alamofire.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Fakery-iOS8.0/Fakery.framework"
   install_framework "$BUILT_PRODUCTS_DIR/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JSQWebViewController/JSQWebViewController.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/ObjectMapper/ObjectMapper.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/ObjectMapper-iOS8.0/ObjectMapper.framework"
   install_framework "$BUILT_PRODUCTS_DIR/PKHUD/PKHUD.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SDWebImage/SDWebImage.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Sparrow/Sparrow.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftColor/SwiftColor.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftMessages/SwiftMessages.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON/SwiftyJSON.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON-iOS8.0/SwiftyJSON.framework"
   install_framework "$BUILT_PRODUCTS_DIR/VTAcknowledgementsViewController/VTAcknowledgementsViewController.framework"
 fi

@@ -17,19 +17,13 @@ class LoginRouter: LoginWireframe {
         let presenter = LoginPresenter()
         let interactor = LoginInteractor()
         let router = LoginRouter()
-        
         let navigation = customNavbar(vc: view)
-        
         view.presenter = presenter
-        
         presenter.view = view
         presenter.interactor = interactor
         presenter.router = router
-        
         interactor.output = presenter
-        
         router.viewController = view
-        
         return navigation
     }
 }

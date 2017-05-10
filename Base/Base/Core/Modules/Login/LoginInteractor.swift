@@ -11,15 +11,10 @@ import Alamofire
 import ObjectMapper
 
 class LoginInteractor: LoginUseCase {
-    
     weak var output: LoginInteractorOutput!
 
     func loginUser() {
-
+        print("LOGIN USER")
+        showInController()
     }
-
-    func registerUser() {
-        
-    }
-
 }

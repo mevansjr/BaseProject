@@ -9,7 +9,6 @@
 import Foundation
 
 class LoginPresenter: LoginPresentation {
-    
     weak var view: LoginView?
     var interactor: LoginUseCase!
     var router: LoginWireframe!
@@ -20,10 +19,6 @@ class LoginPresenter: LoginPresentation {
     func didClickLogin() {
         interactor.loginUser()
     }
-
-    func didClickRegister() {
-        interactor.registerUser()
-    }
 }
 
 extension LoginPresenter: LoginInteractorOutput {
@@ -33,15 +28,6 @@ extension LoginPresenter: LoginInteractorOutput {
     }
 
     func loginUser(_ user: User) {
-        view?.hideActivityIndicator()
-    }
-
-    func registerUserFailed() {
-        view?.showNoContentScreen()
-        view?.hideActivityIndicator()
-    }
-
-    func registerUser(_ user: User) {
         view?.hideActivityIndicator()
     }
 }

@@ -17,16 +17,19 @@ protocol HomePresentation: class {
     var interactor: HomeUseCase! { get set }
     var router: HomeWireframe! { get set }
 
+    func viewDidAppear(_ animated: Bool)
     func viewDidLoad()
+    func didGetUser()
 }
 
 protocol HomeUseCase: class {
     weak var output: HomeInteractorOutput! { get set }
+
+    func getUser()
 }
 
 protocol HomeInteractorOutput: class {
     func getUser(_ user: User)
-    func getUserFailed()
 }
 
 protocol HomeWireframe: class {

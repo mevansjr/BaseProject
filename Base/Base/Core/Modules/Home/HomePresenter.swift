@@ -17,7 +17,15 @@ class HomePresenter: HomePresentation {
     var interactor: HomeUseCase!
     var router: HomeWireframe!
 
+    func viewDidAppear(_ animated: Bool) {
+        didGetUser()
+    }
+
     func viewDidLoad() {
+    }
+
+    func didGetUser() {
+        interactor.getUser()
     }
 }
 

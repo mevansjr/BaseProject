@@ -17,28 +17,21 @@ protocol LoginPresentation: class {
     weak var view: LoginView? { get set }
     var interactor: LoginUseCase! { get set }
     var router: LoginWireframe! { get set }
-
     func viewDidLoad()
-    func didClickRegister()
     func didClickLogin()
 }
 
 protocol LoginUseCase: class {
     weak var output: LoginInteractorOutput! { get set }
-
     func loginUser()
-    func registerUser()
 }
 
 protocol LoginInteractorOutput: class {
     func loginUser(_ user: User)
     func loginUserFailed()
-    func registerUser(_ user: User)
-    func registerUserFailed()
 }
 
 protocol LoginWireframe: class {
     weak var viewController: UIViewController? { get set }
-    
     static func assembleModule() -> UIViewController
 }

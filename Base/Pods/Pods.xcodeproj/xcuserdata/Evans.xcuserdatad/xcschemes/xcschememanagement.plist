@@ -4,7 +4,32 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Alamofire.xcscheme</key>
+		<key>Alamofire-iOS10.3.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Alamofire-iOS8.0.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Fakery-iOS10.3-Faker.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Fakery-iOS10.3.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Fakery-iOS8.0-Faker.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Fakery-iOS8.0.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -19,7 +44,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>ObjectMapper.xcscheme</key>
+		<key>ObjectMapper-iOS10.3.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ObjectMapper-iOS8.0.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -30,6 +60,11 @@
 			<false/>
 		</dict>
 		<key>Pods-Base.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-BaseTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -59,7 +94,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SwiftyJSON.xcscheme</key>
+		<key>SwiftyJSON-iOS10.3.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftyJSON-iOS8.0.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -72,67 +112,107 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2BE8E1B391E2DBC4B1011A613C7D88B4</key>
+		<key>0B06387B20BDD4727C8BFB11</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>37C282303545384B549C7CB489E57D94</key>
+		<key>299DA021522A5CAF4B2B8370</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3ECF42EC0067A98D417563F7CA1A2FFD</key>
+		<key>4B89AA71A15495EC51A70946</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>496F0D3355E5170B777221ADE3404432</key>
+		<key>4F686616F8A6B51B6D3BB25A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4DC059E04CBA98AEDDB5C34E02D551E9</key>
+		<key>5AE8F0C7BEBB80DB6DA34253</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6A2E07948BB5F130AF9F5F652C43B943</key>
+		<key>60137C7BA8DF21AA85526D76</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
+		<key>6B2DAADC375BF6FF225AD8C3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A695AAAC7F0F562AF60E065DBFFC9CFF</key>
+		<key>72366D1344055BC9B0F08A94</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AEB2BC910C23731A5A114DD2BB47A01A</key>
+		<key>822E899E577E821328661FE3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CD6C9FB6B052E1CF663F8A56041EA163</key>
+		<key>88F19E9022E6F5D88407C6B1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D7A75F149082140741FC1E0B5B2863C8</key>
+		<key>8C444A37639B5A3027AAF347</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DBE3E5F1966EE821FA93D81625F8FC76</key>
+		<key>90D28536FDC1B062812EB451</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FE81378E36F4947B2AC91385A441911A</key>
+		<key>9753D7D5E14EB48FA2B5A525</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A16CE99F67D8FDEEB3C067B9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C0CE8BE64F39016176FEFC8A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CDBA8CDEF3A06DFDEA8E9B0B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D190F4E891200169A1211DD1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D751D6D5EE03D1A71B05AF55</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DB782B8D1BD3CB4C5B5DCD0D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EF5ED08362FA658F4AB0FA24</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F7298A32BCC43CE3526D38A3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
