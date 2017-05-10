@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "60137C7BA8DF21AA85526D76"
+               BlueprintIdentifier = "9565B97BB722DEAC47F27EB7"
                BuildableName = "Fakery.framework"
                BlueprintName = "Fakery-iOS10.3"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "60137C7BA8DF21AA85526D76"
+            BlueprintIdentifier = "9565B97BB722DEAC47F27EB7"
             BuildableName = "Fakery.framework"
             BlueprintName = "Fakery-iOS10.3"
             ReferencedContainer = "container:Pods.xcodeproj">

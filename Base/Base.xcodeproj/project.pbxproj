@@ -792,6 +792,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C689DE18EF954AFBA9D54FE9 /* Pods-BaseTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				DEVELOPMENT_TEAM = ZN6BYUYD2C;
@@ -815,6 +816,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7C58A9E0F417E454E901BC5B /* Pods-BaseTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				DEVELOPMENT_TEAM = ZN6BYUYD2C;
@@ -925,6 +927,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F6E02E181A58AF78F5D883CC /* Pods-Base.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ZN6BYUYD2C;
@@ -949,6 +952,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 726180A9ED6A314E82F3C414 /* Pods-Base.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ZN6BYUYD2C;

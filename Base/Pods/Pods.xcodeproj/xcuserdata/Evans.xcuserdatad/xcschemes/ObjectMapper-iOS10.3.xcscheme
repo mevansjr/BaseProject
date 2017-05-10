@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0B06387B20BDD4727C8BFB11"
+               BlueprintIdentifier = "8DB0D9A88642CAAC618A5D9D"
                BuildableName = "ObjectMapper.framework"
                BlueprintName = "ObjectMapper-iOS10.3"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0B06387B20BDD4727C8BFB11"
+            BlueprintIdentifier = "8DB0D9A88642CAAC618A5D9D"
             BuildableName = "ObjectMapper.framework"
             BlueprintName = "ObjectMapper-iOS10.3"
             ReferencedContainer = "container:Pods.xcodeproj">
