@@ -9,7 +9,51 @@
 import Foundation
 import Alamofire
 
+extension Dictionary {
+    func projectConfigPlist() -> [String: Any] {
+        if let path = Bundle.main.path(forResource: "ProjectConfiguration", ofType: "plist") {
+            if let dictionary = NSDictionary(contentsOfFile: path) as? [String: Any] {
+                return dictionary
+            }
+        }
+        return [:]
+    }
+}
+
+extension UIViewController {
+    func titleFromPlist() -> String {
+        let parsed = self.className
+        let replaced = parsed.replacingOccurrences(of: "ViewController", with: "")
+
+        let key = "\(replaced.lowercased())NavigationTitle"
+        print("key: \(key)")
+
+        guard let plist = Constants.shared.plist.Titles else {
+            return ""
+        }
+        if let title = plist[key] {
+            return title
+        }
+        return ""
+    }
+}
+
+extension NSObject {
+    var className: String {
+        return String(describing: type(of: self)).components(separatedBy: ".").last!
+    }
+
+    class var className: String {
+        return String(describing: self).components(separatedBy: ".").last!
+    }
+}
+
 extension String {
+
+    func localized() -> String {
+        return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: "")
+    }
+    
     func isAlphaNumeric() -> Bool {
         let uc = NSCharacterSet.alphanumerics.inverted
         return self.rangeOfCharacter(from: uc) == nil
@@ -95,8 +139,8 @@ extension String {
         var headers = [String: String]()
         headers["Platform"] = "ios"
         headers["Content-Type"] = "application/json"
-        headers["client-id"] = SecureStrings.shared.ApiClientId
-        headers["client-secret"] = SecureStrings.shared.ApiClientSecret
+        headers["client-id"] = String().currentApiClientId()
+        headers["client-secret"] = String().currentApiClientSecret()
         headers["AppVersion"] = String().appVersion()
         return headers
     }

@@ -40,13 +40,12 @@ class LoginContractTests: XCTestCase {
         loginPresentation.viewDidLoad()
         loginPresentation.didClickLogin()
         loginPresentation.loginUser(UserFaker().testUser())
-        loginPresentation.loginUserFailed()
         XCTAssertNotNil(loginPresentation)
     }
 
     func testLoginInteractor() {
         let interactor = LoginInteractor()
-        interactor.loginUser()
+        interactor.loginUser("blah@email.com", password: "123")
         XCTAssertNotNil(interactor)
     }
 

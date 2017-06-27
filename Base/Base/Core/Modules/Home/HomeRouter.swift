@@ -19,7 +19,7 @@ class HomeRouter: HomeWireframe {
         let interactor = HomeInteractor()
         let router = HomeRouter()
 
-        let navigation = customNavbar(vc: view)
+        let navigation = Constants.shared.customNavbar(vc: view)
 
         view.presenter = presenter
 

@@ -23,7 +23,7 @@ class TabRouter: TabWireframe {
         ]
 
         app.tabBarController.delegate = app.self
-        UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: defaultBoldFont(size: 11), NSForegroundColorAttributeName: UIColor.darkGray], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: Constants.shared.defaultBoldFont(size: 11), NSForegroundColorAttributeName: UIColor.darkGray], for: .normal)
         UITabBar.appearance().tintColor = UIColor.white
         UITabBar.appearance().isTranslucent = false
         UITabBar.appearance().backgroundColor = .white

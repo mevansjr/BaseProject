@@ -18,28 +18,23 @@ import IQKeyboardManagerSwift
     // MARK: Application Properties
 
     var window: UIWindow?
-    var internetReachability = Reachability()
-    var hostReachability = Reachability()
     var tabBarController = UITabBarController()
-    var statusBarStyle = UIStatusBarStyle.lightContent
-    var pushRegisterInProcess = false
-    var hostConnected = true
-    var internetConnected = true
-    var permissionsHasShown = false
 
     // MARK: Application Delegate Methods
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        initRootControllerWithVendors(launchOptions: launchOptions)
+        Constants.shared.plist = Constants.shared.initProjectConfiguration()
+        print("plist :: \(Mapper<PlistConfiguration>().toJSONString(Constants.shared.plist, prettyPrint: true)!)")
+        Constants.shared.initRootControllerWithVendors(launchOptions)
         return true
     }
 
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        applicationDidEnd()
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        Constants.shared.applicationDidStart()
     }
 
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        applicationDidStart()
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        Constants.shared.applicationDidEnd()
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
@@ -65,14 +60,14 @@ import IQKeyboardManagerSwift
     // MARK: TabBar Methods
 
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        checkInternetConnection()
+        Constants.shared.checkInternetConnection()
     }
 
     // MARK: Reachability Methods
 
     func reachabilityChanged(note: NSNotification) {
-        if let curReach = note.object as? Reachability {
-            updateInterfaceWithReachability(reachability: curReach)
+        if let reachability = note.object as? Reachability {
+            Constants.shared.updateInterfaceWithReachability(reachability)
         }
     }
     

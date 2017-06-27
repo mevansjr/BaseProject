@@ -17,7 +17,7 @@ class LoginRouter: LoginWireframe {
         let presenter = LoginPresenter()
         let interactor = LoginInteractor()
         let router = LoginRouter()
-        let navigation = customNavbar(vc: view)
+        let navigation = Constants.shared.customNavbar(vc: view)
         view.presenter = presenter
         presenter.view = view
         presenter.interactor = interactor

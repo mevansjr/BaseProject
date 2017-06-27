@@ -10,7 +10,8 @@ import UIKit
 
 protocol LoginView: IndicatableView {
     var presenter: LoginPresentation! { get set }
-    func showNoContentScreen()
+    func displayLoginUser(_ user: User)
+    func displayLoginUserError(_ error: Error)
 }
 
 protocol LoginPresentation: class {
@@ -23,12 +24,12 @@ protocol LoginPresentation: class {
 
 protocol LoginUseCase: class {
     weak var output: LoginInteractorOutput! { get set }
-    func loginUser()
+    func loginUser(_ email: String, password: String)
 }
 
 protocol LoginInteractorOutput: class {
     func loginUser(_ user: User)
-    func loginUserFailed()
+    func loginUserFailed(_ error: Error)
 }
 
 protocol LoginWireframe: class {

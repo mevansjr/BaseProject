@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'A7CAAA1DABC084526D2B7547'
+               BlueprintIdentifier = 'CD4751348A62D98327CF65AA'
                BlueprintName = 'Fakery-iOS8.0-Faker'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Faker.bundle'>

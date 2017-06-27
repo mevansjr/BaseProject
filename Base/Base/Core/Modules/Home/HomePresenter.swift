@@ -18,23 +18,34 @@ class HomePresenter: HomePresentation {
     var router: HomeWireframe!
 
     func viewDidAppear(_ animated: Bool) {
-        didGetUser()
+        interactor.showPermissions()
     }
 
     func viewDidLoad() {
+        interactor.getUser()
     }
 
-    func didGetUser() {
-        interactor.getUser()
+    func didClickLogout() {
+        interactor.logoutUser()
     }
 }
 
 extension HomePresenter: HomeInteractorOutput {
-    func getUserFailed() {
+    func userLoggedOut() {
+        view?.displayLoggedOutUser()
+    }
+
+    func getUserFailed(_ error: Error) {
         view?.hideActivityIndicator()
+        view?.displayUserError(error)
     }
 
     func getUser(_ user: User) {
         view?.hideActivityIndicator()
+        view?.displayUser(user)
+    }
+
+    func showPermissions(_ enabled: Bool) {
+        view?.displayPermissions(enabled)
     }
 }

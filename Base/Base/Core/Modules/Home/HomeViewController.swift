@@ -11,13 +11,11 @@ import Foundation
 class HomeViewController: UIViewController {
 
     var presenter: HomePresentation!
+    var user: User!
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         presenter.viewDidAppear(animated)
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(3)) {
-            permissionsCheck(vc: self)
-        }
     }
 
     override func viewDidLoad() {
@@ -27,10 +25,46 @@ class HomeViewController: UIViewController {
     }
 
     fileprivate func setupView() {
-        navigationItem.title = "Home"
+        navigationItem.title = self.titleFromPlist()
+    }
+
+    @IBAction func logoutAction() {
+        presenter.didClickLogout()
     }
 }
 
 extension HomeViewController: HomeView {
-    
+    func displayLoggedOutUser() {
+        Constants.shared.showOutController()
+    }
+
+    func displayUser(_ user: User) {
+        ClientService.shared.currentUser = user
+        print("user: \(String(describing: user.toJSONString(prettyPrint: true)))")
+    }
+
+    func displayUserError(_ error: Error) {
+        print("error: \(error.localizedDescription)")
+    }
+
+    func displayPermissions(_ enabled: Bool) {
+        if !enabled {
+            return
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(3)) {
+            guard let rootVC = app.window?.rootViewController else {
+                return
+            }
+            Constants.shared.permissionsCheck(vc: rootVC)
+        }
+    }
+
+    func showActivityIndicator() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+
+    func hideActivityIndicator() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
 }

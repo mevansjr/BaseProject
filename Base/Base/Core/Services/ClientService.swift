@@ -12,12 +12,13 @@ import ObjectMapper
 import Alamofire
 import SDWebImage
 
-@objc public class ClientService: NSObject {
+public class ClientService {
 
     // MARK: Properties
 
     var currentUser: User?
     var manager = SessionManager()
+    var oauthHandler: ClientOAuthHandler?
 
     // MARK: Shared Instance
 
@@ -33,48 +34,63 @@ import SDWebImage
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = String().getHeaders()
         self.manager = Alamofire.SessionManager(configuration: configuration)
-        // self.manager.adapter = ClientAccessTokenAdapter(accessToken: "") // Non-OAuth Token Adapter
-        self.manager.adapter = ClientOAuthHandler(clientID: SecureStrings.shared.ApiClientId, baseURLString: SecureStrings.shared.ApiHost, accessToken: "", refreshToken: "") // OAuth2 Adapter
+        self.oauthHandler = self.getClientOAuthHandler()
+        self.manager.adapter = self.oauthHandler
+        self.manager.retrier = self.oauthHandler
     }
 
     // MARK: OAuth Methods
 
-    func loginUser(email: String, password: String, completion: @escaping (_ success: String?, _ error: NSError?) -> ()) {
-        DispatchQueue.global(qos: .background).async {
-            //            var token: Token?
-            //            self.manager.request(ClientRouter.loginUser(email: email, password: password))
-            //            .validate(statusCode: 200..<300).responseString(completionHandler: { (response) in
-            //                switch response.result {
-            //                case .success(let json):
-            //                    token = Mapper<Token>().map(JSONString: json)
-            //                    if token != nil && token!.result != nil && token!.result!.token != nil {
-            //                        String().saveToken(token: token!.result!.token!)
-            //                    }
-            //                default:
-            //                    print("")
-            //                }
-            //                DispatchQueue.main.async {
-            //                    completion(token, nil)
-            //                }
-            //            }).responseJSON { (response) in
-            //                switch response.result {
-            //                case .failure(let error):
-            //                    DispatchQueue.main.async {
-            //                        completion(nil, self.handleError(response: response, error: error as NSError))
-            //                    }
-            //                default:
-            //                    print("")
-            //                }
-            //            }
+    func loginUser(username: String, password: String, completion: @escaping (_ success: User?, _ error: NSError?) -> ()) {
+        DispatchQueue(label: "background", qos: .background).async {
+            var newUser: User?
+            self.manager.request(ClientRouter.loginUser(username, password: password))
+                .validate(statusCode: 200..<300).responseString(completionHandler: { (response) in
+                    switch response.result {
+                    case .success(let json):
+                        UserDefaults.standard.set(username, forKey: Constants.loginUsernameKey)
+                        UserDefaults.standard.set(password, forKey: Constants.loginPasswordKey)
+                        UserDefaults.standard.synchronize()
+
+                        self.oauthHandler = self.saveTokenAndRetreiveOAuthHandler(json)
+                        self.manager.adapter = self.oauthHandler
+                        self.manager.retrier = self.oauthHandler
+
+                        self.getUser(completion: { (user, err) in
+                            if user != nil {
+                                newUser = user!
+                                DispatchQueue.main.async {
+                                    completion(newUser, nil)
+                                }
+                            }
+                            else {
+                                DispatchQueue.main.async {
+                                    completion(nil, err)
+                                }
+                            }
+                        })
+                    default:
+                        print("")
+                    }
+            }).responseJSON { (response) in
+                switch response.result {
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        completion(nil, self.handleError(response: response, error: error as NSError))
+                    }
+                default:
+                    print("")
+                }
+            }
         }
     }
 
     func logoutUser(completion: @escaping (_ success: Bool) -> ())  {
         DispatchQueue.main.async {
-            ClientService.shared.currentUser = nil
+            self.currentUser = nil
             SDImageCache.shared().clearMemory()
             SDImageCache.shared().clearDisk()
-            self.manager.adapter = ClientAccessTokenAdapter(accessToken: "")
+            self.clearTokenAndOAuthHandler()
             completion(true)
         }
     }
@@ -82,21 +98,24 @@ import SDWebImage
     // MARK: Client Methods - User
 
     func getUser(completion: @escaping (_ success: User?, _ error: NSError?) -> ()) {
-        DispatchQueue.global(qos: .background).async {
+       DispatchQueue(label: "background", qos: .background).async {
             var user: User?
             self.manager.request(ClientRouter.getUser())
-                .validate(statusCode: 200..<300).responseString(completionHandler: { (response) in
+                .validate(statusCode: 200..<300)
+                .responseString(completionHandler: { (response) in
                     switch response.result {
                     case .success(let json):
                         user = Mapper<User>().map(JSONString: json)
+
+                        DispatchQueue.main.async {
+                            self.currentUser = user
+                            completion(user, nil)
+                        }
                     default:
                         print("")
                     }
-                    DispatchQueue.main.async {
-                        self.currentUser = user
-                        completion(user, nil)
-                    }
-                }).responseJSON { (response) in
+                })
+                .responseJSON { (response) in
                     switch response.result {
                     case .failure(let error):
                         DispatchQueue.main.async {
@@ -105,14 +124,14 @@ import SDWebImage
                     default:
                         print("")
                     }
-            }
+                }
         }
     }
 
     // MARK: Error Handling Methods
 
     func handleError(response: DataResponse<Any>?, error: NSError) -> NSError? {
-        if !app.internetConnected {
+        if !Constants.shared.internetConnected {
             let err = NSError(domain: "The Internet connection appears to be offline.", code: 900, userInfo: nil)
             return err
         }

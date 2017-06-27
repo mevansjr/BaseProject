@@ -9,10 +9,10 @@
 import Alamofire
 
 enum ClientRouter: URLRequestConvertible {
-    case loginUser(email: String, password: String)
+    case loginUser(String, password: String)
     case getUser()
     
-    static let baseURLString = SecureStrings.shared.ApiHost
+    static let baseURLString = String().currentApiDomain()
     
     var method: HTTPMethod {
         switch self {
@@ -26,9 +26,9 @@ enum ClientRouter: URLRequestConvertible {
     var path: String {
         switch self {
         case .loginUser:
-            return "/login"
+            return "/oauth/token"
         case .getUser:
-            return "/users/me"
+            return "/\(String().currentApiVersion())/User/GetUser"
         }
     }
     
@@ -41,12 +41,14 @@ enum ClientRouter: URLRequestConvertible {
         urlRequest.httpMethod = method.rawValue
         
         switch self {
-        case .loginUser(let email, let password):
-            let parameters = ["email": email, "password": password]
-            UserDefaults.standard.set(email, forKey: Constants.loginEmailKey)
-            UserDefaults.standard.set(password, forKey: Constants.loginPasswordKey)
-            UserDefaults.standard.synchronize()
-            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        case .loginUser(let username, let password):
+            let parameters = ["username": username,
+                              "password": password,
+                              "grant_type": "password",
+                              "client_id": String().currentApiClientId(),
+                              "client_secret": String().currentApiClientSecret()]
+
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
         case .getUser:
             urlRequest = try URLEncoding.default.encode(urlRequest, with: nil)
         }

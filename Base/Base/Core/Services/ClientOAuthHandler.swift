@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import ObjectMapper
 
 class ClientOAuthHandler: RequestAdapter, RequestRetrier {
     private typealias RefreshCompletion = (_ succeeded: Bool, _ accessToken: String?, _ refreshToken: String?) -> Void

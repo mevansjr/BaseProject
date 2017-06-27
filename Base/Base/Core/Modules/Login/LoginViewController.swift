@@ -19,7 +19,7 @@ class LoginViewController: UIViewController {
     }
   
     fileprivate func setupView() {
-        navigationItem.title = "Login"
+        navigationItem.title = self.titleFromPlist()
     }
 
     @IBAction func loginAction() {
@@ -28,6 +28,20 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: LoginView {
-    func showNoContentScreen() {
+    func displayLoginUser(_ user: User) {
+        ClientService.shared.currentUser = user
+        Constants.shared.showInController()
+    }
+
+    func displayLoginUserError(_ error: Error) {
+        print("error: \(error.localizedDescription)")
+    }
+
+    func showActivityIndicator() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+
+    func hideActivityIndicator() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 }

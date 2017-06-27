@@ -8,28 +8,35 @@
 
 import Foundation
 
-
 protocol HomeView: IndicatableView {
+    var presenter: HomePresentation! { get set }
+    func displayUser(_ user: User)
+    func displayUserError(_ error: Error)
+    func displayPermissions(_ enabled: Bool)
+    func displayLoggedOutUser()
 }
 
 protocol HomePresentation: class {
     weak var view: HomeView? { get set }
     var interactor: HomeUseCase! { get set }
     var router: HomeWireframe! { get set }
-
-    func viewDidAppear(_ animated: Bool)
     func viewDidLoad()
-    func didGetUser()
+    func viewDidAppear(_ animated: Bool)
+    func didClickLogout()
 }
 
 protocol HomeUseCase: class {
     weak var output: HomeInteractorOutput! { get set }
-
     func getUser()
+    func showPermissions()
+    func logoutUser()
 }
 
 protocol HomeInteractorOutput: class {
     func getUser(_ user: User)
+    func getUserFailed(_ error: Error)
+    func showPermissions(_ enabled: Bool)
+    func userLoggedOut()
 }
 
 protocol HomeWireframe: class {

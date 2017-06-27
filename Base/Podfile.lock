@@ -11,9 +11,6 @@ PODS:
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
-  - Sparrow/Core (1.0.1)
-  - Sparrow/Modules/RequestPermission (1.0.1):
-    - Sparrow/Core
   - SwiftColor (0.4.0)
   - SwiftMessages (3.3.2)
   - SwiftyJSON (3.1.4)
@@ -29,20 +26,10 @@ DEPENDENCIES:
   - ObjectMapper (~> 2.2)
   - PKHUD (~> 4.0)
   - SDWebImage (~> 3.8)
-  - Sparrow/Modules/RequestPermission (from `https://github.com/IvanVorobei/Sparrow.git`)
   - SwiftColor
   - SwiftMessages
   - SwiftyJSON
   - VTAcknowledgementsViewController
-
-EXTERNAL SOURCES:
-  Sparrow:
-    :git: https://github.com/IvanVorobei/Sparrow.git
-
-CHECKOUT OPTIONS:
-  Sparrow:
-    :commit: a1f506b48b0ae5ee7de5d328e000402c86384f74
-    :git: https://github.com/IvanVorobei/Sparrow.git
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
@@ -54,12 +41,11 @@ SPEC CHECKSUMS:
   ObjectMapper: fb30f71e08470d1e5a20b199fafe1246281db898
   PKHUD: 48af884cf00c2213b0313b739d914e6cab1c0f5e
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
-  Sparrow: 4b7826e69656f4745b0b4f74afadefa4f19cb9ee
   SwiftColor: c240d8cb2e1a29d731ae8deca8739eac6b9c56bd
   SwiftMessages: 278ef49901fae934241d73b2a781edb1bf7bea5c
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   VTAcknowledgementsViewController: e1de80f2c0ce31cc7e1c6f1c8aaeec2770371f09
 
-PODFILE CHECKSUM: 28cf7ca42e7d774ebdfde14e2efdc9f1a058c3a4
+PODFILE CHECKSUM: be2527b19bb57e4700e531c921f2a8606a27ee77
 
 COCOAPODS: 1.1.1

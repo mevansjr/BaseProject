@@ -13,6 +13,27 @@ class HomeInteractor: HomeUseCase  {
     weak var output: HomeInteractorOutput!
 
     func getUser() {
-        print("GET USER")
+        ClientService.shared.getUser { (user, error) in
+            guard let err = error else {
+                if user != nil {
+                    self.output.getUser(user!)
+                }
+                return
+            }
+            self.output.getUserFailed(err)
+        }
     }
+
+    func logoutUser() {
+        ClientService.shared.logoutUser { (success) in
+            self.output.userLoggedOut()
+        }
+    }
+
+    func showPermissions() {
+        if Constants.shared.permissionsDialogEnabled {
+            self.output.showPermissions(Constants.shared.permissionsDialogEnabled)
+        }
+    }
+
 }

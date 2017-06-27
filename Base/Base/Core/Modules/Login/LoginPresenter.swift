@@ -17,17 +17,18 @@ class LoginPresenter: LoginPresentation {
     }
     
     func didClickLogin() {
-        interactor.loginUser()
+        interactor.loginUser("mevansjr@gmail.com", password: "Therock5")
     }
 }
 
 extension LoginPresenter: LoginInteractorOutput {
-    func loginUserFailed() {
-        view?.showNoContentScreen()
+    func loginUserFailed(_ error: Error) {
         view?.hideActivityIndicator()
+        view?.displayLoginUserError(error)
     }
 
     func loginUser(_ user: User) {
         view?.hideActivityIndicator()
+        view?.displayLoginUser(user)
     }
 }

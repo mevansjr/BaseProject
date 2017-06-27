@@ -15,39 +15,39 @@ class RootInteractor: RootUseCase {
     weak var output: LoginInteractorOutput!
 
     func checkUserState() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         ClientService.shared.getUser { (success, _) in
-            DispatchQueue.main.async {
-                if success != nil {
-                    showInController()
-                }
-                else {
-                    showOutController()
-                }
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            if success != nil {
+                Constants.shared.showInController()
+            }
+            else {
+                Constants.shared.showOutController()
             }
         }
     }
 
     func initPlayPusher(launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         ClientService.shared.getUser { (success, error) in
-            DispatchQueue.main.async {
-                UIApplication.shared.applicationIconBadgeNumber = 0
-                let options: AnyObject? = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as AnyObject?
-                if UIDevice.current.identifierForVendor != nil {
-                    let uuid = UIDevice.current.identifierForVendor!.uuidString
-                    guard let userId = success?.UserId else {
-                        PlayPusher.sharedInstance().initPlayPusher(uuid, withClientId: SecureStrings.shared.PlayPusherClientId, withClientSecret: SecureStrings.shared.PlayPusherClientSecret)
-                        if (options != nil) {
-                            PlayPusher.sharedInstance().handleNotification(launchOptions)
-                        }
-                        print("uuid: \(uuid)")
-                        return
-                    }
-                    PlayPusher.sharedInstance().initPlayPusher(uuid, withClientId: SecureStrings.shared.PlayPusherClientId, withClientSecret: SecureStrings.shared.PlayPusherClientSecret, withUserId: "\(userId)")
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            UIApplication.shared.applicationIconBadgeNumber = 0
+            let options: AnyObject? = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as AnyObject?
+            if UIDevice.current.identifierForVendor != nil {
+                let uuid = UIDevice.current.identifierForVendor!.uuidString
+                guard let userId = success?.UserId else {
+                    PlayPusher.sharedInstance().initPlayPusher(uuid, withClientId: String().playPusherClientId(), withClientSecret: String().playPusherClientSecret())
                     if (options != nil) {
                         PlayPusher.sharedInstance().handleNotification(launchOptions)
                     }
                     print("uuid: \(uuid)")
+                    return
                 }
+                PlayPusher.sharedInstance().initPlayPusher(uuid, withClientId: String().playPusherClientId(), withClientSecret: String().playPusherClientSecret(), withUserId: "\(userId)")
+                if (options != nil) {
+                    PlayPusher.sharedInstance().handleNotification(launchOptions)
+                }
+                print("uuid: \(uuid)")
             }
         }
     }
