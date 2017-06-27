@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API</key>
+	<dict>
+		<key>isDevEnvironment</key>
+		<true/>
+		<key>Production</key>
+		<dict>
+			<key>domain</key>
+			<string>https://api.fanamana.com</string>
+			<key>version</key>
+			<string>v1</string>
+			<key>clientId</key>
+			<string>IOSApp</string>
+			<key>clientSecret</key>
+			<string>4rYdCMSSKq33ieor</string>
+		</dict>
+		<key>Development</key>
+		<dict>
+			<key>domain</key>
+			<string>https://api-dev.fanamana.com</string>
+			<key>version</key>
+			<string>v1</string>
+			<key>clientId</key>
+			<string>IOSApp</string>
+			<key>clientSecret</key>
+			<string>4rYdCMSSKq33ieor</string>
+		</dict>
+	</dict>
+	<key>Vendors</key>
+	<dict>
+		<key>GoogleAnalytics</key>
+		<dict>
+			<key>key</key>
+			<string>Empty</string>
+		</dict>
+		<key>PlayPusher</key>
+		<dict>
+			<key>clientId</key>
+			<string>Empty</string>
+			<key>clientSecret</key>
+			<string>Empty</string>
+		</dict>
+	</dict>
+	<key>Titles</key>
+	<dict>
+		<key>homeNavigationTitle</key>
+		<string>Home</string>
+		<key>loginNavigationTitle</key>
+		<string>Login</string>
+	</dict>
+	<key>PermissionDialog</key>
+	<dict>
+		<key>permissionsDialogEnabled</key>
+		<true/>
+	</dict>
+	<key>UIAppearance</key>
+	<dict>
+		<key>statusBarStyleLight</key>
+		<false/>
+	</dict>
+</dict>
+</plist>
