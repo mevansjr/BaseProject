@@ -18,4 +18,7 @@ protocol RootUseCase: class {
 
     func checkUserState()
     func initPlayPusher(launchOptions: [UIApplicationLaunchOptionsKey: Any]?)
+    func initBranchIO(launchOptions: [UIApplicationLaunchOptionsKey: Any]?)
+    func handleDeeplink(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
+    func continueActivity(_ userActivity: NSUserActivity)
 }

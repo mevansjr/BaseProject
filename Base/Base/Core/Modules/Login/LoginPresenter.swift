@@ -17,6 +17,7 @@ class LoginPresenter: LoginPresentation {
     }
     
     func didClickLogin() {
+        view?.showActivityIndicator()
         interactor.loginUser("mevansjr@gmail.com", password: "Therock5")
     }
 }

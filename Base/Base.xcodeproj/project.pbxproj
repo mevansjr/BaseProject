@@ -11,6 +11,7 @@
 		010A9C3F1EC3526800C3CBCC /* UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010A9C3D1EC3526800C3CBCC /* UserTests.swift */; };
 		010A9C411EC357E100C3CBCC /* LoginContractTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010A9C401EC357E100C3CBCC /* LoginContractTests.swift */; };
 		010A9C431EC359EC00C3CBCC /* Fakery+LoginModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010A9C421EC359EC00C3CBCC /* Fakery+LoginModule.swift */; };
+		010C69961F040AEA001B9A0A /* SecureStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010C69951F040AEA001B9A0A /* SecureStrings.swift */; };
 		011443EA1F029B4C000A9EB0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011443E71F029B4C000A9EB0 /* Constants.swift */; };
 		011443EB1F029B4C000A9EB0 /* ProjectConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 011443E81F029B4C000A9EB0 /* ProjectConfiguration.plist */; };
 		011443EE1F02A3F7000A9EB0 /* PlistConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011443ED1F02A3F7000A9EB0 /* PlistConfiguration.swift */; };
@@ -160,6 +161,8 @@
 		010A9C3D1EC3526800C3CBCC /* UserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTests.swift; sourceTree = "<group>"; };
 		010A9C401EC357E100C3CBCC /* LoginContractTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginContractTests.swift; sourceTree = "<group>"; };
 		010A9C421EC359EC00C3CBCC /* Fakery+LoginModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Fakery+LoginModule.swift"; sourceTree = "<group>"; };
+		010C69951F040AEA001B9A0A /* SecureStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureStrings.swift; sourceTree = "<group>"; };
+		010C69971F041C04001B9A0A /* Base.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Base.entitlements; sourceTree = "<group>"; };
 		011443E71F029B4C000A9EB0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		011443E81F029B4C000A9EB0 /* ProjectConfiguration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ProjectConfiguration.plist; sourceTree = "<group>"; };
 		011443ED1F02A3F7000A9EB0 /* PlistConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistConfiguration.swift; sourceTree = "<group>"; };
@@ -401,6 +404,7 @@
 			isa = PBXGroup;
 			children = (
 				011443E71F029B4C000A9EB0 /* Constants.swift */,
+				010C69951F040AEA001B9A0A /* SecureStrings.swift */,
 				011443E81F029B4C000A9EB0 /* ProjectConfiguration.plist */,
 			);
 			path = Configuration;
@@ -441,6 +445,7 @@
 		0137570D1E8EC69400B17404 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				010C69971F041C04001B9A0A /* Base.entitlements */,
 				0137570E1E8EC69400B17404 /* Core */,
 				013757211E8EC69400B17404 /* Libraries */,
 				013757411E8EC85B00B17404 /* Support */,
@@ -1263,6 +1268,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = ZN6BYUYD2C;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -1498,6 +1508,7 @@
 				01CA95061EFC0AAE0097C341 /* SPRequestPermissionDialogInteractivePresenterInterface.swift in Sources */,
 				01B091671E8EE1E400735F4B /* TabContract.swift in Sources */,
 				01CA95181EFC0AAE0097C341 /* SPLinesCircleButtonsView.swift in Sources */,
+				010C69961F040AEA001B9A0A /* SecureStrings.swift in Sources */,
 				0137574C1E8EC91300B17404 /* StackView.m in Sources */,
 				01CA951D1EFC0AAE0097C341 /* SPSegmentedControl.swift in Sources */,
 				01CA94F41EFC0AAE0097C341 /* SPUIViewControllerExtenshion.swift in Sources */,
@@ -1704,6 +1715,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Base/Base.entitlements;
 				DEVELOPMENT_TEAM = ZN6BYUYD2C;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Base/Support/Info.plist";
@@ -1729,6 +1741,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Base/Base.entitlements;
 				DEVELOPMENT_TEAM = ZN6BYUYD2C;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Base/Support/Info.plist";

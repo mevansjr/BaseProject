@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Alamofire-iOS8.0/Alamofire.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Branch/Branch.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Fakery-iOS8.0/Fakery.framework"
   install_framework "$BUILT_PRODUCTS_DIR/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JSQWebViewController/JSQWebViewController.framework"
@@ -98,6 +99,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Alamofire-iOS8.0/Alamofire.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Branch/Branch.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Fakery-iOS8.0/Fakery.framework"
   install_framework "$BUILT_PRODUCTS_DIR/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JSQWebViewController/JSQWebViewController.framework"

@@ -1,5 +1,10 @@
 PODS:
   - Alamofire (4.4.0)
+  - Branch (0.14.12):
+    - Branch/Core (= 0.14.12)
+    - Branch/without-IDFA (= 0.14.12)
+  - Branch/Core (0.14.12)
+  - Branch/without-IDFA (0.14.12)
   - Crashlytics (3.8.4):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.11)
@@ -18,6 +23,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
+  - Branch
   - Crashlytics
   - Fabric
   - Fakery
@@ -33,6 +39,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Branch: f63d9cf82ac09747349a73184a0b739d28781c4d
   Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   Fakery: 97b99c23937d2e025d9135c75e2b17351ccd5031
@@ -46,6 +53,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   VTAcknowledgementsViewController: e1de80f2c0ce31cc7e1c6f1c8aaeec2770371f09
 
-PODFILE CHECKSUM: be2527b19bb57e4700e531c921f2a8606a27ee77
+PODFILE CHECKSUM: c701d9e58b02042042f829f12303e9cc217fb942
 
 COCOAPODS: 1.1.1

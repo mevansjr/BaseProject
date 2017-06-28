@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import ObjectMapper
+import Branch
 
 class RootInteractor: RootUseCase {
     
@@ -50,6 +51,25 @@ class RootInteractor: RootUseCase {
                 print("uuid: \(uuid)")
             }
         }
+    }
+
+    func initBranchIO(launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+        Branch.getInstance()?.initSession(launchOptions: launchOptions, automaticallyDisplayDeepLinkController: true, deepLinkHandler: { params, error in
+            if error == nil {
+                print("params: %@", params?.description as Any)
+            }
+        })
+    }
+
+    func handleDeeplink(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) {
+        Branch.getInstance().application(app,
+                                         open: url,
+                                         options:options
+        )
+    }
+
+    func continueActivity(_ userActivity: NSUserActivity) {
+        Branch.getInstance().continue(userActivity)
     }
 
 }

@@ -23,9 +23,7 @@ import IQKeyboardManagerSwift
     // MARK: Application Delegate Methods
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        Constants.shared.plist = Constants.shared.initProjectConfiguration()
-        print("plist :: \(Mapper<PlistConfiguration>().toJSONString(Constants.shared.plist, prettyPrint: true)!)")
-        Constants.shared.initRootControllerWithVendors(launchOptions)
+        Constants.shared.applicationDidFinishLaunching(launchOptions)
         return true
     }
 
@@ -38,6 +36,12 @@ import IQKeyboardManagerSwift
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+        Constants.shared.handleDeeplinks(app, open: url, options: options)
+        return true
+    }
+
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        Constants.shared.continueActivity(userActivity)
         return true
     }
 

@@ -42,28 +42,28 @@ extension String {
 extension String {
     func liveApiDomain() -> String {
         guard let domain = Constants.shared.plist.API?.Production?.domain else {
-            return ""
+            return SecureStrings.shared.ApiLiveHost
         }
         return domain
     }
 
     func liveApiVersion() -> String {
         guard let version = Constants.shared.plist.API?.Production?.version else {
-            return ""
+            return SecureStrings.shared.ApiVersion
         }
         return version
     }
 
     func liveApiClientId() -> String {
         guard let clientId = Constants.shared.plist.API?.Production?.clientId else {
-            return ""
+            return SecureStrings.shared.ApiClientId
         }
         return clientId
     }
 
     func liveApiClientSecret() -> String {
         guard let clientSecret = Constants.shared.plist.API?.Production?.clientSecret else {
-            return ""
+            return SecureStrings.shared.ApiClientSecret
         }
         return clientSecret
     }
@@ -72,34 +72,47 @@ extension String {
 extension String {
     func devApiDomain() -> String {
         guard let domain = Constants.shared.plist.API?.Development?.domain else {
-            return ""
+            return SecureStrings.shared.ApiDevHost
         }
         return domain
     }
 
     func devApiVersion() -> String {
         guard let version = Constants.shared.plist.API?.Development?.version else {
-            return ""
+            return SecureStrings.shared.ApiVersion
         }
         return version
     }
 
     func devApiClientId() -> String {
         guard let clientId = Constants.shared.plist.API?.Development?.clientId else {
-            return ""
+            return SecureStrings.shared.ApiClientId
         }
         return clientId
     }
 
     func devApiClientSecret() -> String {
         guard let clientSecret = Constants.shared.plist.API?.Development?.clientSecret else {
-            return ""
+            return SecureStrings.shared.ApiClientSecret
         }
         return clientSecret
     }
 }
 
 extension ClientService {
+
+    func setupManangerAndOAuthHandler() {
+        self.oauthHandler = self.getClientOAuthHandler()
+        self.manager.adapter = self.oauthHandler
+        self.manager.retrier = self.oauthHandler
+    }
+
+    func setupManangerAndOAuthHandler(json: String) {
+        self.oauthHandler = self.saveTokenAndRetreiveOAuthHandler(json)
+        self.manager.adapter = self.oauthHandler
+        self.manager.retrier = self.oauthHandler
+    }
+
     func saveToken(_ json: String) {
         UserDefaults.standard.set(json, forKey: Token.tokenKey)
         UserDefaults.standard.synchronize()

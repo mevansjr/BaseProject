@@ -32,7 +32,8 @@ class HomeInteractor: HomeUseCase  {
 
     func showPermissions() {
         if Constants.shared.permissionsDialogEnabled {
-            self.output.showPermissions(Constants.shared.permissionsDialogEnabled)
+            Constants.shared.permissionsDialogEnabled = false
+            self.output.showPermissions(true)
         }
     }
 

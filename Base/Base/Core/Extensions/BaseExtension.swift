@@ -10,7 +10,18 @@ import Foundation
 import Alamofire
 
 extension Dictionary {
-    func projectConfigPlist() -> [String: Any] {
+
+    func serverProjectConfigPlist() -> [String: Any] {
+        guard let fileURL =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("ProjectConfigurationServer.plist") else {
+            return [:]
+        }
+        if let dictionary = NSDictionary(contentsOf: fileURL) as? [String: Any] {
+            return dictionary
+        }
+        return [:]
+    }
+
+    func localProjectConfigPlist() -> [String: Any] {
         if let path = Bundle.main.path(forResource: "ProjectConfiguration", ofType: "plist") {
             if let dictionary = NSDictionary(contentsOfFile: path) as? [String: Any] {
                 return dictionary
@@ -22,12 +33,7 @@ extension Dictionary {
 
 extension UIViewController {
     func titleFromPlist() -> String {
-        let parsed = self.className
-        let replaced = parsed.replacingOccurrences(of: "ViewController", with: "")
-
-        let key = "\(replaced.lowercased())NavigationTitle"
-        print("key: \(key)")
-
+        let key = String().createControllerKey(obj: self, name: "NavigationTitle")
         guard let plist = Constants.shared.plist.Titles else {
             return ""
         }
@@ -48,6 +54,14 @@ extension NSObject {
     }
 }
 
+extension UserDefaults {
+    func saveUsernameAndPassword(username: String, password: String) {
+        self.set(username, forKey: Constants.loginUsernameKey)
+        self.set(password, forKey: Constants.loginPasswordKey)
+        self.synchronize()
+    }
+}
+
 extension String {
 
     func localized() -> String {
@@ -63,6 +77,12 @@ extension String {
         let alphaSet = NSCharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
         let uc = alphaSet.inverted
         return self.rangeOfCharacter(from: uc) == nil
+    }
+
+    func createControllerKey(obj: NSObject, name: String) -> String {
+        let parsed = obj.className
+        let replaced = parsed.replacingOccurrences(of: "ViewController", with: "")
+        return "\(replaced.lowercased())\(name)"
     }
 }
 

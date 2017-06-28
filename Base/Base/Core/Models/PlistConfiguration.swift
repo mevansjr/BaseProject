@@ -68,6 +68,7 @@ class PlistPermissionDialog : NSObject, Mappable {
 
 class PlistAPI : NSObject, Mappable {
 
+    var plistConfigurationDomain: String?
     var isDevEnvironment: Bool?
     var Production: PlistApiEndpoint?
     var Development: PlistApiEndpoint?
@@ -79,6 +80,7 @@ class PlistAPI : NSObject, Mappable {
     override init(){}
 
     func mapping(map: Map) {
+        plistConfigurationDomain <- map["plistConfigurationDomain"]
         isDevEnvironment <- map["isDevEnvironment"]
         Production <- map["Production"]
         Development <- map["Development"]

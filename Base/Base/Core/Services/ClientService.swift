@@ -34,9 +34,45 @@ public class ClientService {
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = String().getHeaders()
         self.manager = Alamofire.SessionManager(configuration: configuration)
-        self.oauthHandler = self.getClientOAuthHandler()
-        self.manager.adapter = self.oauthHandler
-        self.manager.retrier = self.oauthHandler
+        self.setupManangerAndOAuthHandler()
+    }
+
+    // MARK: Retreive Configuration Plist
+
+    func retreiveConfigurationPlist(completion: @escaping (_ success: Bool) -> ()) {
+        let fileName = "ProjectConfigurationServer.plist"
+        Constants.shared.deleteFile(name: fileName)
+
+        guard let servicePath = Constants.shared.plist.API?.plistConfigurationDomain else {
+            completion(false)
+            return
+        }
+
+        if servicePath.characters.count == 0 {
+            completion(false)
+            return
+        }
+
+        Alamofire.request(servicePath)
+            .responsePropertyList(completionHandler: { (response) in
+                if response.data != nil {
+                    let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent(fileName)
+                    do {
+                        try response.data!.write(to: fileURL, options: .atomic)
+                        let serverDictionary = Dictionary<String, Any>().serverProjectConfigPlist()
+                        if serverDictionary.keys.count > 0 {
+                            completion(true)
+                            return
+                        }
+                        Constants.shared.deleteFile(name: fileName)
+                    }
+                    catch {
+                        completion(false)
+                        return
+                    }
+                }
+                completion(false)
+            })
     }
 
     // MARK: OAuth Methods
@@ -45,16 +81,12 @@ public class ClientService {
         DispatchQueue(label: "background", qos: .background).async {
             var newUser: User?
             self.manager.request(ClientRouter.loginUser(username, password: password))
-                .validate(statusCode: 200..<300).responseString(completionHandler: { (response) in
+                .validate(statusCode: 200..<300)
+                .responseString(completionHandler: { (response) in
                     switch response.result {
                     case .success(let json):
-                        UserDefaults.standard.set(username, forKey: Constants.loginUsernameKey)
-                        UserDefaults.standard.set(password, forKey: Constants.loginPasswordKey)
-                        UserDefaults.standard.synchronize()
-
-                        self.oauthHandler = self.saveTokenAndRetreiveOAuthHandler(json)
-                        self.manager.adapter = self.oauthHandler
-                        self.manager.retrier = self.oauthHandler
+                        UserDefaults.standard.saveUsernameAndPassword(username: username, password: password)
+                        self.setupManangerAndOAuthHandler(json: json)
 
                         self.getUser(completion: { (user, err) in
                             if user != nil {
@@ -72,7 +104,8 @@ public class ClientService {
                     default:
                         print("")
                     }
-            }).responseJSON { (response) in
+                })
+                .responseJSON { (response) in
                 switch response.result {
                 case .failure(let error):
                     DispatchQueue.main.async {

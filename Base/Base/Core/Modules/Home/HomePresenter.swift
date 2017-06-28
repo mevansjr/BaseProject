@@ -22,16 +22,19 @@ class HomePresenter: HomePresentation {
     }
 
     func viewDidLoad() {
+        view?.showActivityIndicator()
         interactor.getUser()
     }
 
     func didClickLogout() {
+        view?.showActivityIndicator()
         interactor.logoutUser()
     }
 }
 
 extension HomePresenter: HomeInteractorOutput {
     func userLoggedOut() {
+        view?.hideActivityIndicator()
         view?.displayLoggedOutUser()
     }
 

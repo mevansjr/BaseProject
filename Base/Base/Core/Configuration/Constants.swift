@@ -16,6 +16,32 @@ import ObjectMapper
 import SwiftMessages
 import Fabric
 import Crashlytics
+import Branch
+
+struct UI {
+    static let contentWidth: CGFloat = 280.0
+    static let dialogHeightSinglePermission: CGFloat = 260.0
+    static let dialogHeightTwoPermissions: CGFloat = 360.0
+    static let dialogHeightThreePermissions: CGFloat = 460.0
+    static let maxWidth: CGFloat = 10000.0
+}
+
+struct ScreenSize {
+    static let SCREEN_WIDTH = UIScreen.main.bounds.size.width
+    static let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
+    static let SCREEN_MAX_LENGTH = max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.width)
+    static let SCREEN_MIN_LENGTH = min(UIScreen.main.bounds.size.height, UIScreen.main.bounds.size.height)
+}
+
+struct DeviceType {
+    static let IS_IPHONE_4_OR_LESS = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MIN_LENGTH < 568.0
+    static let IS_IPHONE_5 = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MIN_LENGTH == 568.0
+    static let IS_IPHONE_6 = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MIN_LENGTH == 667.0
+    static let IS_IPHONE_6P = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MIN_LENGTH == 736.0
+    static let IS_IPAD = UIDevice.current.userInterfaceIdiom == .pad && ScreenSize.SCREEN_MIN_LENGTH == 1024.0
+}
+
+let app = UIApplication.shared.delegate as! AppDelegate
 
 @objc public class Constants: NSObject {
 
@@ -220,8 +246,45 @@ import Crashlytics
         }
     }
 
-    func initProjectConfiguration() -> PlistConfiguration {
-        let dictionary = Dictionary<String, Any>().projectConfigPlist()
+    func applicationDidFinishLaunching(_ launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+        setupSplashController()
+        Constants.shared.initProjectConfiguration { (plist) in
+            if plist != nil {
+                Constants.shared.plist = plist!
+            }
+            Constants.shared.initRootControllerWithVendors(launchOptions)
+        }
+    }
+
+    func initProjectConfiguration(completion: @escaping (_ plist: PlistConfiguration?) -> ()) {
+        initLocalConfigurationPlist()
+        ClientService.shared.retreiveConfigurationPlist(completion: { (success) in
+
+            if success {
+                let serverDictionary = Dictionary<String, Any>().serverProjectConfigPlist()
+                if serverDictionary.keys.count > 0 {
+                    Constants.shared.plist = self.setupPlistVariables(dictionary: serverDictionary)
+                    print("server plist :: \(Mapper<PlistConfiguration>().toJSONString(Constants.shared.plist, prettyPrint: true)!)")
+                    completion(Constants.shared.plist)
+                    return
+                }
+            }
+
+            let localDictionary = Dictionary<String, Any>().localProjectConfigPlist()
+            Constants.shared.plist = self.setupPlistVariables(dictionary: localDictionary)
+            print("local plist :: \(Mapper<PlistConfiguration>().toJSONString(Constants.shared.plist, prettyPrint: true)!)")
+            completion(Constants.shared.plist)
+        })
+    }
+
+    func initLocalConfigurationPlist() {
+        let localDictionary = Dictionary<String, Any>().localProjectConfigPlist()
+        if Mapper<PlistConfiguration>().map(JSON: localDictionary) != nil {
+            Constants.shared.plist = Mapper<PlistConfiguration>().map(JSON: localDictionary)!
+        }
+    }
+
+    func setupPlistVariables(dictionary: Dictionary<String, Any>) -> PlistConfiguration {
         if Mapper<PlistConfiguration>().map(JSON: dictionary) != nil {
             Constants.shared.plist = Mapper<PlistConfiguration>().map(JSON: dictionary)!
         }
@@ -237,8 +300,19 @@ import Crashlytics
         return Constants.shared.plist
     }
 
+    func deleteFile(name: String) {
+        let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent(name)
+        do {
+            try FileManager.default.removeItem(at: fileURL)
+        }
+        catch {
+            return
+        }
+    }
+
     func initRootControllerWithVendors(_ launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         RootInteractor().initPlayPusher(launchOptions: launchOptions)
+        RootInteractor().initBranchIO(launchOptions: launchOptions)
         Fabric.sharedSDK().debug = true
         Fabric.with([Crashlytics.self])
         setupSplashController()
@@ -257,6 +331,14 @@ import Crashlytics
         NotificationCenter.default.removeObserver(app.self, name: NSNotification.Name(rawValue: "kNetworkReachabilityChangedNotification"), object: nil)
     }
 
+    func handleDeeplinks(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) {
+        RootInteractor().handleDeeplink(app, open: url, options: options)
+    }
+
+    func continueActivity(_ userActivity: NSUserActivity) {
+        RootInteractor().continueActivity(userActivity)
+    }
+
     func defaultRegularFont(size: CGFloat) -> UIFont {
         return UIFont.systemFont(ofSize: size)
     }
@@ -269,35 +351,10 @@ import Crashlytics
         return UIFont.boldSystemFont(ofSize: size)
     }
 
-}
+    func uniq<S: Sequence, E: Hashable>(source: S) -> [E] where E==S.Iterator.Element {
+        var seen: [E:Bool] = [:]
+        return source.filter { seen.updateValue(true, forKey: $0) == nil }
+    }
 
-struct UI {
-    static let contentWidth: CGFloat = 280.0
-    static let dialogHeightSinglePermission: CGFloat = 260.0
-    static let dialogHeightTwoPermissions: CGFloat = 360.0
-    static let dialogHeightThreePermissions: CGFloat = 460.0
-    static let maxWidth: CGFloat = 10000.0
 }
-
-struct ScreenSize {
-    static let SCREEN_WIDTH = UIScreen.main.bounds.size.width
-    static let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
-    static let SCREEN_MAX_LENGTH = max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.width)
-    static let SCREEN_MIN_LENGTH = min(UIScreen.main.bounds.size.height, UIScreen.main.bounds.size.height)
-}
-
-struct DeviceType {
-    static let IS_IPHONE_4_OR_LESS = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MIN_LENGTH < 568.0
-    static let IS_IPHONE_5 = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MIN_LENGTH == 568.0
-    static let IS_IPHONE_6 = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MIN_LENGTH == 667.0
-    static let IS_IPHONE_6P = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MIN_LENGTH == 736.0
-    static let IS_IPAD = UIDevice.current.userInterfaceIdiom == .pad && ScreenSize.SCREEN_MIN_LENGTH == 1024.0
-}
-
-func uniq<S: Sequence, E: Hashable>(source: S) -> [E] where E==S.Iterator.Element {
-    var seen: [E:Bool] = [:]
-    return source.filter { seen.updateValue(true, forKey: $0) == nil }
-}
-
-let app = UIApplication.shared.delegate as! AppDelegate
 
